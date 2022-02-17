@@ -1,5 +1,7 @@
 import discord
 import os
+import player
+
 
 client = discord.Client()
 
@@ -12,7 +14,10 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('hello world')
+    if message.content.startswith('$test'):
+        player_id = message.author.id
+        p1 = player.Player(player_id)
+        await message.channel.send('your id is: ' + str(p1.playerid))
 
-client.run(os.environ['TOKEN'])
+if __name__ == "__main__":
+  client.run(os.environ['TOKEN'])
